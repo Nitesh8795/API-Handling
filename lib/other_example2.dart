@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -39,7 +40,30 @@ class _photos_reqState extends State<photos_req> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(title: Text("API Handling"),),
+      body: Column(
+        children: [
+          FutureBuilder(
+            future: getPhotos(),
+            builder: (context, AsyncSnapshot <List<Photos>> snapshot)
+            {
+              return ListView.builder(
+                itemCount: photoList.length,
+                itemBuilder: (context, index)
+                {
+                  return ListTile(
+                    leading: CircleAvatar(backgroundImage: NetworkImage(snapshot.data![index].url.toString()),),
+                    title: Text(snapshot.data![index].title.toString()),
+                    subtitle: Text(snapshot.data![index].id.toString()),
+                  );
+                },
+              );
+            },
+          )
+        ],
+      ),
+    );
   }
 }
 
