@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("API Handlling"),
+        title: Text("API Handling"),
       ),
       body: Column(
         children: <Widget>[
