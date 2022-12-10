@@ -45,7 +45,7 @@ class _ImageUploaderState extends State<ImageUploader> {
     stream.cast();
 
     var length = await image!.length();
-    var uri = Uri.parse("");
+    var uri = Uri.parse("https://fakestoreapi.com/products");
     var request = new http.MultipartRequest("POST", uri);
 
     request.fields["title"] = "static title";
@@ -106,6 +106,21 @@ class _ImageUploaderState extends State<ImageUploader> {
                           ),
                       ),
                 ),
+              ),
+            ),
+            const SizedBox(
+              height: 60,
+            ),
+
+            GestureDetector(
+              onTap: (){
+                uploadImage();
+              },
+              child: Container(
+                height: 50,
+                width: 200,
+                decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(17)),
+                child: Center(child: const Text("Upload", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
               ),
             ),
           ],
