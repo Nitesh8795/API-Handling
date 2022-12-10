@@ -58,10 +58,16 @@ class _ImageUploaderState extends State<ImageUploader> {
 
     if(response.statusCode == 200)
       {
+        setState(() {
+          showSpinner = false;
+        });
         print("Image uploaded succesfully");
       }
     else
       {
+        setState(() {
+          showSpinner = false;
+        });
         print("Image not uploaded ");
       }
   }
