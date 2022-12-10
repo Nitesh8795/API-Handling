@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class ImageUploader extends StatefulWidget {
   const ImageUploader({Key? key}) : super(key: key);
@@ -71,35 +72,38 @@ class _ImageUploaderState extends State<ImageUploader> {
       appBar: AppBar(
         title: Text("Image Uploader"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: GestureDetector(
-              onTap: (){
-                getImage();
-              },
-              child: Container(
-                child: image == null
-                    ? const Text("Pick A Image", style: TextStyle(fontSize: 25),)
-                    : Padding(
-                  padding: EdgeInsets.all(4.0),
-                      child: Container(
-                          child: Center(
-                            child: Image.file(
-                              File(image!.path),
-                              height: 200,
-                              width: 200,
-                              fit: BoxFit.cover,
+      body: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: GestureDetector(
+                onTap: (){
+                  getImage();
+                },
+                child: Container(
+                  child: image == null
+                      ? const Text("Pick A Image", style: TextStyle(fontSize: 25),)
+                      : Padding(
+                    padding: EdgeInsets.all(4.0),
+                        child: Container(
+                            child: Center(
+                              child: Image.file(
+                                File(image!.path),
+                                height: 200,
+                                width: 200,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                    ),
+                      ),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
