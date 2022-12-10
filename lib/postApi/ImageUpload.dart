@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:async';
 import 'dart:math';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -30,6 +31,37 @@ class _ImageUploaderState extends State<ImageUploader> {
     else
       {
         print("no image selected");
+      }
+  }
+
+  Future<void> uploadImage() async
+  {
+    setState(() {
+      showSpinner = true;
+    });
+
+    var stream = new http.ByteStream(image!.openRead());
+    stream.cast();
+
+    var length = await image!.length();
+    var uri = Uri.parse("");
+    var request = new http.MultipartRequest("POST", uri);
+
+    request.fields["title"] = "static title";
+
+    var multiport = new http.MultipartFile("image", stream, length);
+
+    request.files.add(multiport);
+
+    var response = await request.send();
+
+    if(response.statusCode == 200)
+      {
+        print("Image uploaded succesfully");
+      }
+    else
+      {
+        print("Image not uploaded ");
       }
   }
 
