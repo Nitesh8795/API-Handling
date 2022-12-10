@@ -3,6 +3,7 @@ import 'package:api_handling/Register/SignUp.dart';
 import 'package:api_handling/example_three.dart';
 import 'package:api_handling/home.dart';
 import 'package:api_handling/other_example2.dart';
+import 'package:api_handling/postApi/ImageUpload.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: signup(),
+      home: ImageUploader(),
     );
   }
 }
