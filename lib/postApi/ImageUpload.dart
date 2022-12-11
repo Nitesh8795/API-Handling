@@ -35,7 +35,7 @@ class _ImageUploaderState extends State<ImageUploader> {
       }
   }
 
-  Future<void> uploadImage() async
+  Future<void> uploadImage(BuildContext context) async
   {
     setState(() {
       showSpinner = true;
@@ -62,6 +62,8 @@ class _ImageUploaderState extends State<ImageUploader> {
           showSpinner = false;
         });
         print("Image uploaded succesfully");
+        String text = "Image uploaded succesfully";
+        snackBar(text, context);
       }
     else
       {
@@ -69,6 +71,9 @@ class _ImageUploaderState extends State<ImageUploader> {
           showSpinner = false;
         });
         print("Image not uploaded ");
+
+        String text = "Image not uploaded";
+        snackBar(text, context);
       }
   }
 
@@ -114,7 +119,7 @@ class _ImageUploaderState extends State<ImageUploader> {
 
             GestureDetector(
               onTap: (){
-                uploadImage();
+                uploadImage(context);
               },
               child: Container(
                 height: 50,
@@ -127,5 +132,14 @@ class _ImageUploaderState extends State<ImageUploader> {
         ),
       ),
     );
+  }
+
+  void snackBar(String text1, BuildContext context)
+  {
+    final snackBar = SnackBar(
+      content: Text(text1),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
